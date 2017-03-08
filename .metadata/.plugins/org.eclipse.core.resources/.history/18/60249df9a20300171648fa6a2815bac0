@@ -1,0 +1,29 @@
+package Warehouse;
+
+import java.io.BufferedReader;
+
+public class WarehouseSystem {
+
+	public void WarehouseSystem(){
+		
+	}
+	
+	public StringBuffer readFile( String fileName){
+		
+		try{ 
+			FileReader fr = new FileReader(fileName);
+			BufferedReader br = new BufferedReader(fr);
+			StringBuffer strbuff;
+			String str;
+			while ((str = br.readLine()) != null) {
+				strbuff +=(str + "\n");
+				}
+			br.close();
+		} catch (IOException e){
+			System.out.println("File not found")
+		}
+	}
+	public static void main(String[] args){
+		
+	}
+}

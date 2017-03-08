@@ -1,0 +1,35 @@
+package Warehouse;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class WarehouseSystem {
+
+	public void WarehouseSystem(){
+		
+	}
+	
+	public StringBuffer readFile( String fileName){
+		
+		try{ 
+			FileReader fr = new FileReader(fileName);
+			BufferedReader br = new BufferedReader(fr);
+			StringBuffer strbuff = null;
+			String str;
+			while ((str = br.readLine()) != null) {
+				strbuff.append(str + "\n");
+				}
+			br.close();
+			return strbuff;
+		} catch (IOException e){
+			System.out.println("File not found");
+		}
+		return null;
+	}
+	public static void main(String[] args){
+		WarehouseSystem Ws = new WarehouseSystem();
+		Ws.readFile("TestText.txt");
+		
+	}
+}

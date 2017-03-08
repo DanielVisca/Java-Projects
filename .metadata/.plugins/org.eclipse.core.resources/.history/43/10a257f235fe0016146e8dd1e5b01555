@@ -1,0 +1,17 @@
+package fastfriends;
+
+public class PersonalInfo {
+	
+	private String firstName;
+	private String lastName;
+	private int phoneNumber;
+	private String email;
+	
+	private PersonalInfo(String first,String last,int number, String email){
+		this.firstName = first;
+		this.lastName = last;
+		this.phoneNumber = number;
+		this.email = email;	
+	}
+	
+}

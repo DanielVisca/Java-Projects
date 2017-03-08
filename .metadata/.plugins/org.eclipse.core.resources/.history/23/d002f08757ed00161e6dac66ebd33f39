@@ -1,0 +1,44 @@
+
+public class UserAccount {
+	
+	private String userName;
+	private String email;
+	private int accountNum;
+	public static int nextAccountNum = 1;
+	public UserAccount(String userName, String email) {
+	this.userName = userName;
+	this.email = email;
+	accountNum = nextAccountNum;
+	nextAccountNum++;
+	}
+	protected UserAccount(String email) {
+	this.email = email;
+	this.accountNum = 0;
+	}
+	public String getUserName() {
+	return userName;
+	}
+	public void setUserName(String newName) {
+	userName = newName;
+	}
+	public int getAccountNum() {
+	return accountNum;
+	}
+	public String getEmail() {
+	return email;
+	}
+	public void setEmail(String email) {
+	this.email = email;
+	}
+	public static int getNextAccountNum() {
+	return nextAccountNum;
+	}
+	
+	public boolean equals(UserAccount ua) {
+	return this.accountNum == ua.accountNum;
+	}
+	public String toString() {
+	return "User Name: " + userName + ", Account Number: " + accountNum;
+	}
+
+}

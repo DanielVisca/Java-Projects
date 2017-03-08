@@ -1,0 +1,207 @@
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Scanner;
+
+public class Image {
+	
+	public File img;
+	public StringBuffer history = new StringBuffer();
+	public static List<Tag> tagList = new ArrayList<Tag>();
+	public static Scanner reader = new Scanner(System.in);  // Reading from System.in
+	
+	//for changing the name when adding and removing tags
+	String[] fileNameSplits;
+	// for all
+	int extensionIndex;
+	
+	//for reverting the name back to previous names
+	String[] pathTillName;
+	
+	Image(File img) {
+		this.img = img;
+		history.append(img.getName());
+		fileNameSplits = img.getPath().split("\\.");
+		extensionIndex = fileNameSplits.length - 1;
+	}
+
+	public void addTag(String tag) {
+		File name = new File(fileNameSplits[0] +"@" + tag + "." + fileNameSplits[extensionIndex]);
+	
+		if (img.renameTo(name)) {
+			System.out.println("Tag succesfully added.");
+			tagList.add(new Tag(tag));
+			
+			img = new File(fileNameSplits[0] +"@" + tag + "." + fileNameSplits[extensionIndex]);
+			fileNameSplits = img.getPath().split("\\.");
+			extensionIndex = fileNameSplits.length - 1;
+			history.append("\n" + img.getName());
+		}
+		else {
+			System.out.println("Adding tag failed!");
+		}
+	}
+		
+	public void removeTag(String tag) {
+
+		String replacedStr = img.getPath().replaceAll("@" + tag, "");
+
+		File name = new File(replacedStr);
+
+		
+		if (img.renameTo(name)) {
+			System.out.println("Tag succesfully removed.");
+			Tag.countAll--;
+			img = new File(img.getPath().replaceAll("@" + tag, ""));
+		}
+		else {
+			System.out.println("Removing tag failed!");
+		}
+		
+		
+	}
+	
+	public StringBuffer getHistory() {
+		return history;
+	
+	}
+	
+	@Override
+	public String toString() {
+		return img.getName();
+	}
+	
+	/** Select an existing Tag from all Tags */
+	public void tagSelection() {
+		int numberSelect = 0;
+		//loop through tags in allTags and print the tag with its corresponding number
+		Object[] tagArray = tagList.toArray();
+		for (int i=0; i < tagList.size(); i++){
+			if (tagArray[i] != null || tagArray[i].toString() != "") {
+				numberSelect++;
+				String tag = tagArray[i].toString();
+				System.out.println( numberSelect + ": " + tag);
+			}
+		}
+		System.out.println("Choose a Tag.");
+		//read the users input
+		int tagIndex = reader.nextInt() - 1;
+		if ((tagIndex >= 0)  && (tagIndex < tagList.size())){
+			//select corresponding Tag
+			String chosenTag = tagArray[tagIndex].toString();
+			//add the tag to the current image
+			this.addTag(chosenTag);
+			}
+		else{
+			System.out.println("Please select a valid option");
+			this.tagSelection();
+			}
+	}
+	
+	public void revert() {
+		String[] listNames = history.toString().split("\n");
+		System.out.println("Choose a number from the list of previous names.");
+		int counterV = 1;
+		for (String items: listNames) {
+			System.out.println(counterV + ". " + items);
+			counterV++;
+		}
+		int nameIndex = reader.nextInt() - 1;
+		if ((nameIndex >= 0) && (nameIndex <= counterV)) {
+			String replacedStr = img.getPath().replaceAll(img.getName(), listNames[nameIndex]);
+			File nameV = new File(replacedStr + listNames[nameIndex]);
+			if (img.renameTo(nameV)) {
+				System.out.println("Image name succesfully reverted.");
+				img = new File(img.getPath().replaceAll(img.getName(), listNames[nameIndex]));
+			}
+			else {
+				System.out.println("Reverting image name failed!");
+			}
+		}
+		
+	}
+	
+	//*save all available tags To use, call this on tag list*/
+
+	{
+		}
+		//public static List<StringBuffer> pastNames = new ArrayList<StringBuffer>();
+		/** Helper method for nameRevert. create a list of pastNames for the image */
+		//private void historyToList(){
+		//	StringBuffer previousName = new StringBuffer();
+		//	while (i=0; previousName[i])
+		//}
+		
+		/** Revert the Image name back to a previous name */
+		//public void nameRevert(){
+		//	for (int i=0; i < .size(); i++){
+		//		int numberSelect = i+1;
+			//	String tag = allTags[i];
+		//		System.out.println( numberSelect + ':'+ tag);
+		//	}
+		//}
+		/**
+		 * Open and read a file, and return the lines in the file as a list
+		 * of Strings.
+		 * (Demonstrates Java FileReader, BufferedReader, and Java5.)
+		 */
+
+//ToDo	
+//Create a Variable called allTagsPath in class Start that is the path to the chosen directory. change the end of the path to allTags.txt
+		/** says if the file exists with path allTagsPath */
+		//assume file exists		
+		public void loadAllTags(){
+	
+				Collection<? extends Tag> content = readFile(allTagsPath);
+
+					//add content in file to tagList
+				//tagList.add((Tag) content);
+				tagList.addAll(content);
+				System.out.println("Opened existing Alltags File");
+					
+				}
+		
+	
+		/** Read a file that we already have the name of */
+		
+		private List<String> readFile(String filename)
+		{
+		  List<String> records = new ArrayList<String>();
+		  try
+		  {
+		    BufferedReader reader = new BufferedReader(new FileReader(filename));
+		    String line;
+		    while ((line = reader.readLine()) != null)
+		    {
+		      records.add(line);
+		    }
+		    reader.close();
+		    return records;
+		  }
+		  catch (Exception e)
+		  {
+		    System.err.format("Exception occurred trying to read '%s'.", filename);
+		    e.printStackTrace();
+		    return null;
+		  }
+		}
+
+	
+	public static void main (String args[]) {
+		//file.getpath()
+		//File imago = new File("C:\\Users\\User\\Documents\\as2\\group_0721\\a2\\imagedeep.png");
+		//System.out.println(imago.exists());
+		//Image img1 = new Image(imago);
+		//img1.addTag("test1");
+		//img1.addTag("test2");
+		//img1.addTag("test3");
+		//System.out.println(img1.getHistory());
+		//img1.tagSelection();
+		
+	}
+}

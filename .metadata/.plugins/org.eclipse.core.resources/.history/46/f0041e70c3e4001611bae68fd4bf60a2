@@ -1,0 +1,55 @@
+package movies;
+
+import java.util.ArrayList;
+
+public class Movie {
+	private String name;
+	private ArrayList<Actor> actors;
+	private int year;
+
+	public Movie(String name, int year) {
+		this.name = name;
+		this.year = year;
+		this.actors = new ArrayList();
+	}
+	
+	/**
+	add Actor to the list of Actors
+	@param: Actor
+ 	@return 
+	*/
+	public void addActor(Actor Actor){
+	this.actors.add(Actor);
+	}
+
+	/**
+	Compare if object is has the same year and name
+	*/
+	public boolean equals(Object other){
+	//if other is a movie, compare the year and name, other wiser 	//return false
+
+	if (other instanceof Movie){
+		return (this.name == ((Movie) other).getName()) && (this.year == ((Movie) other).getYear());
+	}
+	else{
+	return false;
+	}
+	
+	}
+	public ArrayList<Actor> getActors(){
+	return this.actors;
+	}
+	public String getName(){
+	return this.name;
+	}
+	public int getYear(){
+	return this.year;	
+	}
+//DO THISS
+//Make sure that line separators are right!!
+	public toString(){
+		return "Move: " + this.name + System.lineSeparator() + "Actors in Movie: " + this.actors.toString() + System.lineSeparator() + "Year of Movie release: " + this.year 
+	
+	}
+
+}

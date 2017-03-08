@@ -1,0 +1,5 @@
+package quiz2;
+
+public interface Shelf {
+
+}

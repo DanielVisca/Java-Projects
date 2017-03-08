@@ -1,0 +1,28 @@
+package a2;
+import java.util.Iterator;
+
+public class SomeClass implements Iterable<Integer> {
+
+	@Override
+	public Iterator iterator() {
+		return new NaturalNumberIterator();
+	}
+	
+	public static void main(String[] args) {
+		SomeClass sc = new SomeClass();
+		for (int i : sc) {
+			System.out.println(i);
+			
+			if (i > 10) {
+				break;
+			}
+		}
+		
+		Iterator iter = sc.iterator();
+		System.out.println(iter.next());
+		System.out.println(iter.next());
+		System.out.println(iter.next());
+		System.out.println(iter.next());
+		System.out.println(iter.next());
+	}
+}

@@ -1,0 +1,169 @@
+package a2;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Start extends JFrame implements ActionListener {
+		
+	public int len_list = 0;
+	
+	private Start() {
+	super("PhotoRenamer");
+	setSize(800, 600);
+	setResizable(false);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	setLayout(new FlowLayout());
+			
+	JButton button0 = new JButton("Choose Directory");
+	JButton button1 = new JButton("Add tag");
+	JButton button2 = new JButton("Remove tag");
+	JButton button3 = new JButton("Tags");
+	JButton button4 = new JButton("History");
+			
+	JPanel Panel1 = new JPanel();
+	Panel1.setBorder ( new TitledBorder ( new EtchedBorder (), "Display Area" ) );
+		
+	JTextArea textArea1 = new JTextArea(60, 35);
+	textArea1.setEditable(false);
+			
+	JScrollPane scrollPane1 = new JScrollPane(textArea1);
+	scrollPane1.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+			
+	Panel1.add(scrollPane1);
+					
+	add(button0);
+	add(button1);
+	add(button2);
+	add(button3);
+	add(button4);
+			
+	//textArea1.setText("a\n b \n a\n b \n a\n b \n b \n a\n b \n a\n b \n a\n b \n c \n a \n a \n");
+			
+	add(Panel1, BorderLayout.SOUTH);	
+			
+	button0.addActionListener(this);
+	button1.addActionListener(this);
+	button2.addActionListener(this);
+	button3.addActionListener(this);
+	button4.addActionListener(this);
+			
+	}
+		
+	public void actionPerformed(ActionEvent e) {
+	String name = e.getActionCommand();
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));	
+	//len_list = countLines();
+	
+	
+	
+	if (name.equals("Choose Directory")) {
+		DirectoryExplorer.buildWindow().setVisible(true);
+	}
+	
+	else if (name.equals("Add tag")) {
+		
+		System.out.println("Select an image number.");
+		
+		try { 
+			String input0 = reader.readLine();
+			if (Integer.valueOf(input0) > 0 && Integer.valueOf(input0) <= FileChooserButtonListener.numberSelector) {
+				System.out.println("1. Add a new tag.");
+				System.out.println("2. Add a pre-existing tag.");
+				System.out.println("3. Revert back to a previous name.");
+				
+				String num0 = reader.readLine();
+				
+				if (Integer.valueOf(num0) == 1) {
+					System.out.println("Please type out a tag.");
+					String newTag = reader.readLine();
+					FileChooserButtonListener.ImageListArray[Integer.valueOf(input0)-1].addTag(newTag);
+				} else if (Integer.valueOf(num0) == 2) {
+					FileChooserButtonListener.ImageListArray[Integer.valueOf(input0)-1].tagSelection();
+				} else if (Integer.valueOf(num0) == 3) {
+					FileChooserButtonListener.ImageListArray[Integer.valueOf(input0)-1].revert();
+				}
+			}
+			else {
+				System.out.println("That is not a valid choice!");
+			}
+			
+		} catch (IOException e1) {
+			System.out.println("Please enter a valid number!");
+			e1.printStackTrace();
+		}
+	}
+	
+	else if (name.equals("Remove tag")) { 
+		
+		System.out.println("Select an image number.");
+		
+		try {
+			String input1 = reader.readLine();
+			if (Integer.valueOf(input1) > 0 && Integer.valueOf(input1) <= FileChooserButtonListener.numberSelector) {
+				System.out.println("Type in the tag that you wish to remove.");
+				String tagg1 = reader.readLine();
+				FileChooserButtonListener.ImageListArray[Integer.valueOf(input1)-1].removeTag(tagg1);
+				
+			}
+			else {
+				System.out.println("That is not a valid choice!");
+			}
+				
+			
+		} catch (IOException e1) {
+			System.out.println("Please enter a valid number!");
+			e1.printStackTrace();
+		}
+	}
+	
+	else if (name.equals("Tags")) {
+		
+		System.out.println("There are " + Tag.count + "tags in use." );
+		System.out.println(Tag.getNames());
+	}
+	
+	else if (name.equals("History")) {
+		
+		System.out.println("Select an image number.");
+		
+		try {
+			String input3 = reader.readLine();
+			if (Integer.valueOf(input3) > 0 && Integer.valueOf(input3) <= FileChooserButtonListener.numberSelector) {
+				System.out.println(FileChooserButtonListener.ImageListArray[Integer.valueOf(input3)-1].getHistory());
+			}
+			else {
+				System.out.println("That is not a valid choice!");
+			}
+		} catch (IOException e1) {
+			System.out.println("Please enter a valid number!");
+			e1.printStackTrace();
+		}
+	}
+	}
+
+	public static void main (String[] args) {
+		new Start().setVisible(true);
+	}
+		
+
+}

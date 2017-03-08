@@ -1,0 +1,43 @@
+package movies;
+
+import java.util.ArrayList;
+
+public class Actor {
+	private String name;
+	private ArrayList movies;
+
+	public Actor(String name) {
+		this.name = name;
+		this.movies = new ArrayList();
+	}
+	public boolean actedIn(Movie movie){
+		if (movie instance Movie):
+			return this.name in movie.actors();
+		else:
+			return false;
+	}
+	public boolean actedInSameMovies(Actor actor){
+		for (movie : this.movies){
+			if (actor.actedIn(movie){
+				return true
+				}
+			}
+		return false	
+	}			
+	public boolean actedWith(Actor actor){
+		if (actor instance Actor) {
+			for (movie : actor.movies) {
+				if (movie in this.movies)
+// finish with equals to instead of in
+
+	public void addMovie(Movie movie){
+		this.movies.append(movie)
+	}
+	public boolean equals(Object object){
+		if (other instance Actor){
+			other
+	public String getName(){
+		return this.name
+		}
+	public toString().
+}

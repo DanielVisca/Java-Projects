@@ -1,0 +1,31 @@
+package quiz2;
+
+public abstract class Book {
+
+  private String title;
+  public static String itemGroup = "Book";
+
+  public Book() {
+  }
+
+  public Book(String title) {
+    this.title = title;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public abstract String getCreators();
+
+  public static String getItemGroup() {
+    return itemGroup;
+  }
+
+public static void main(String[] args){
+	ComicBook b1 = new ComicBook("Pride n Prejudice", "Ghandi");
+	Book b2 = new ComicBook("Not Pride n Prejudice", "not Ghandi");
+	b2.getTitle();
+	b1.getTitle();
+	}
+}

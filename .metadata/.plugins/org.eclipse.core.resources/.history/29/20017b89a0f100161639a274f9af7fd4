@@ -1,0 +1,27 @@
+
+public class TemporaryUserAccount extends UserAccount {
+
+	private String userName;
+	private int accountNum;
+	public static int nextAccountNum = 1;
+	public TemporaryUserAccount(String userName, String email) {
+	super(email);
+	this.userName = userName;
+	}
+	public boolean equals(UserAccount ua) {
+	if (!(ua instanceof TemporaryUserAccount)) {
+	return false;
+	} else {
+	if ((((UserAccount)ua).getUserName()).equals(
+	((UserAccount) this).getUserName()) &&
+	(((UserAccount) ua).getAccountNum()) ==
+	(((UserAccount) this).getAccountNum())) {
+	return true;
+	}
+	}
+	return false;
+	}
+	public String toString() {
+	return "Temporary Account " + accountNum + " belongs to: " + userName;
+	}
+}

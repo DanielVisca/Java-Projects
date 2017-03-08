@@ -1,0 +1,66 @@
+
+public class UserAccount {
+	
+	private String userName;
+	private String email;
+	private int accountNum;
+	public static int nextAccountNum = 1;
+	public UserAccount(String userName, String email) {
+	this.userName = userName;
+	this.email = email;
+	accountNum = nextAccountNum;
+	nextAccountNum++;
+	}
+	protected UserAccount(String email) {
+	this.email = email;
+	this.accountNum = 0;
+	}
+	public String getUserName() {
+	return userName;
+	}
+	public void setUserName(String newName) {
+	userName = newName;
+	}
+	public int getAccountNum() {
+	return accountNum;
+	}
+	public String getEmail() {
+	return email;
+	}
+	public void setEmail(String email) {
+	this.email = email;
+	}
+	public static int getNextAccountNum() {
+	return nextAccountNum;
+	}
+	
+	public boolean equals(UserAccount ua) {
+	return this.accountNum == ua.accountNum;
+	}
+	public String toString() {
+	return "User Name: " + userName + ", Account Number: " + accountNum;
+	}
+	public static void main(String[] args){
+		UserAccount acc1 = new UserAccount("Paul","acc1@domain.com");
+		UserAccount acc2 = new TemporaryUserAccount("george","acc2@domain.com");
+		TemporaryUserAccount acc3 = (TemporaryUserAccount) acc1;
+		UserAccount acc4 = new TemporaryUserAccount("james","acc4@domain.com");
+		UserAccount acc5 = acc1;
+		UserAccount acc6 = new UserAccount("Paul","acc1@domain.com");
+		System.out.print(acc1.userName);
+		System.out.print(acc2.userName);
+		//System.out.print(acc3.userName);
+		System.out.print(acc4.userName);
+		System.out.print(acc5.userName);
+		System.out.print(acc1.getEmail());
+		System.out.print(acc2.getEmail());
+		System.out.print(acc3.getEmail());
+		System.out.print(acc4.getEmail());
+		System.out.print(acc5.getEmail());
+		System.out.print(acc1.equals(acc5));
+		System.out.print(acc3.equals(acc1));
+		System.out.print(acc1.equals(acc6));
+		
+	}
+}
+

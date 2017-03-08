@@ -1,0 +1,95 @@
+package movies;
+
+import java.util.ArrayList;
+
+public class Actor {
+	private String name;
+	private ArrayList<Movie> movies;
+
+	public Actor(String name) {
+		this.name = name;
+		this.movies = new ArrayList<Movie>();
+	}
+	
+	public boolean actedIn(Object movie){
+		if (movie instanceof Movie);
+			for (Object aMovie : this.movies){
+				if (aMovie.equals(movie)) {
+					return true;
+				}
+			}
+		return false;
+	}
+	public boolean actedWith(Actor other){
+		if (other instanceof Actor){
+			for (Movie movie : this.movies){
+				if (movie.getActors().contains(other)){
+					return true;
+				}
+			}
+			return false;
+		}
+		return false;
+	}
+	
+	public boolean actedInSameMovies(Object other){
+		if (other instanceof Actor){
+			if (this.movies.size() != ((Actor) other).getMovies().size()){
+				return false;
+			}
+			for (Movie movie :((Actor) other).movies) {
+				for (Movie ourActorsMovies : this.movies){
+					if (movie.equals(ourActorsMovies)) {
+						return true;
+					}
+				}
+// finish with equals to instead of in
+			}
+			return false;
+		}
+		return false;
+	}
+	public void addMovie(Movie movie){
+		if (!this.movies.contains(movie)){
+		this.movies.add(movie);
+		movie.addActor(this);
+		}
+	}
+	//Should this take type object?
+	public boolean equals(Object other){
+		if (other instanceof Actor){;
+			if (this.actedInSameMovies(other) && ((Actor) other).getName().equals(this.name)){
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}		
+	private String actorListToString(){
+		String output = " (";
+		int i = 0;
+		for (Movie movie: this.movies){
+			i++;
+			output += movie.getName();
+			if (i < this.movies.size()){
+				output += ", ";
+				}	
+		}
+		output += ")";
+		if (output.equals(" ()")){
+			return "";
+		}
+		return output;
+	}
+	public String getName(){ return this.name; }
+	
+	//Read instructions for toString!!
+	public String toString(){
+		System.out.println(this.name +System.lineSeparator() + this.actorListToString());
+		return this.name + this.actorListToString();
+	}
+	public ArrayList<Movie> getMovies(){
+		return this.movies;
+	}
+	
+}

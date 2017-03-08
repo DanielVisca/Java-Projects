@@ -1,0 +1,29 @@
+package a2;
+import java.util.Iterator;
+
+public class ImageListIterator implements Iterator<Integer> {
+
+	// Usually, this will point to the innards of the Iterable object; here,
+	// since we're just iterating through the natural numbers, we don't need
+	// to do that.
+	/** The next natural number to produce. */
+	private int nextNumber = 0;
+
+	@Override
+	public boolean hasNext() {
+		return true;
+	}
+
+	@Override
+	public Integer next() {
+		// Usually, this will look at the innards of the Iterable object to
+		// figure out what to do next.
+
+		// remember the current next number
+		int next = this.nextNumber;
+		// get ready for the next call to next
+		this.nextNumber++;
+		return next;
+	}
+
+}

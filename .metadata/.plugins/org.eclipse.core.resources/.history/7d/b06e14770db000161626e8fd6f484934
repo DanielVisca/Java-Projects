@@ -1,0 +1,88 @@
+
+
+import java.util.ArrayList
+
+
+/*
+ * Accepts an array of image files and performs operations on them.
+ */
+
+public class ImageDoc {
+	
+	public int tagNumber = 0;
+	ArrayList<String> listNames = new ArrayList<String>();  
+	
+	
+	Image(File[] filelist){
+				
+	}
+	
+	/*
+	 * Adds a tag to one specific image file.
+	 */
+	public void addTag(String Tag) {
+		
+	}
+	
+	//public int ListNumberTags(){}
+	
+	/*
+	 * Displays every tag within the directory 
+	 * and the number of time each was used.
+	 */
+	public String ListAllTags() {
+		
+	}
+	
+	
+	/*
+	 * Displays the most popular tag within the directory.
+	 */
+	public String MostCommonTag(){
+
+	}
+	
+	/* 
+	 * Returns the image file with the most amount of tags. 
+	 */
+	public String MostTagsFile(){
+		
+	}
+	
+	/*
+	 * Removes a specific tag from a specific image file in the directory.
+	 */
+	public void removeTag(File FileName, String Tag) {
+		
+	}
+	
+	/*
+	 * Removes all tags from one specific image file in the directory.
+	 */
+	public void removeTagAll(String Tag, File FileName) {
+		
+	}
+	
+	/* 
+	 * Removes all tags from all image files in the directory.
+	 */
+	public void deleteTagAll(String Tag){
+		
+	}
+	
+	/*
+	 * Returns the current date.
+	 */
+	public String TimeStamp() {
+		
+	}
+	
+	public void History() {
+		
+	}
+
+	public static void main (String[] args) {
+		
+	}
+	
+}

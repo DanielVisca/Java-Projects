@@ -1,0 +1,10 @@
+from directory group_0368/project paste commands
+javac -sourcepath ./src -d ./bin ./src/warehouse/*.java
+java -cp ./bin warehouse.WarehouseSystem
+
+order input: orders.txt
+order output: orders_on_truck.csv
+inventory input: initial.csv
+inventory output: final.csv
+log output: events.csv
+

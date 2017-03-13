@@ -1,0 +1,20 @@
+Daniel
+
+Jamie
+- Created CRC and maintained UML with information from initial meetings
+- Implemented managers including JobManager, ProcessManager, PickingManager, SequencingManager, LoadingManager
+- Implemented Job class and Worker abstract class
+- Implemented Loader and part of Picker subclassses
+- Assisted implementing WarehouseSystem
+- Created FileHelper class to read/write files, and log simulation information
+- Wrote tests for all of the above in ManagerTests and FileHelperTests
+
+Maggie
+- Contributed to CRC design and completed final UML with changes from implementation process
+- Implemented warehouse layout, including Level, Rack, Zone
+- Implemented inventory classes and methods, including InventoryManager and Replenisher
+- Created InventoryLocations class to map SKUs and their locations
+- Proofread for Checkstyle errors
+
+Queenie
+
